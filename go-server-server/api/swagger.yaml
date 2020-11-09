@@ -1,0 +1,199 @@
+---
+swagger: "2.0"
+info:
+  description: "description"
+  version: "0.0.1"
+  title: "Portal Client API"
+  termsOfService: "terms"
+  contact:
+    name: "oharu"
+  license:
+    name: "MIT"
+    url: "http://opensource.org/licenses/MIT"
+paths:
+  /users/{id}:
+    get:
+      summary: "ユーザ情報取得API"
+      description: "指定されたIDのユーザ情報を返します。"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "成功時のレスポンス"
+          schema:
+            type: "object"
+  /users/{id}/course:
+    get:
+      summary: "時間割取得API"
+      description: "指定されたIDのユーザの時間割を返します。"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "OK"
+  /users/{id}/task:
+    get:
+      summary: "課題一覧取得API"
+      description: "指定されたIDのユーザの課題を一覧で返します。"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "integer"
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Task"
+  /users/{id}/notification:
+    get:
+      summary: "通知一覧取得API"
+      description: "指定されたIDのユーザの通知を一覧で返します。"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "integer"
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Notification"
+  /courses/{id}:
+    get:
+      summary: "講義情報取得API"
+      description: "指定されたIDの講義情報を返します。"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "integer"
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "OK"
+  /tasks:
+    get:
+      summary: "Get all task."
+      description: "Return an array of Task model."
+      parameters: []
+      responses:
+        "200":
+          description: "A JSON array of Task model."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Task"
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      grade:
+        type: "integer"
+        format: "int32"
+  File:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      content:
+        type: "string"
+      published_at:
+        type: "string"
+    example:
+      id: "id"
+      published_at: "published_at"
+      content: "content"
+  Task:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      group:
+        type: "string"
+      title:
+        type: "string"
+      name:
+        type: "string"
+      description:
+        type: "string"
+      status:
+        type: "string"
+      deadline:
+        type: "string"
+      update_at:
+        type: "string"
+    example:
+      name: "name"
+      update_at: "update_at"
+      description: "description"
+      id: 0
+      title: "title"
+      deadline: "deadline"
+      group: "group"
+      status: "status"
+  Notification:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      date:
+        type: "string"
+      file:
+        $ref: "#/definitions/File"
+    example:
+      date: "date"
+      file:
+        id: "id"
+        published_at: "published_at"
+        content: "content"
+      description: "description"
+      id: 0
+      title: "title"
+  Course:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      description:
+        type: "string"
+      year:
+        type: "integer"
+        format: "int32"
+      semester:
+        type: "string"
+      day:
+        type: "integer"
+        format: "int32"
+      time:
+        type: "integer"
+        format: "int32"
+      location:
+        type: "string"
