@@ -14,7 +14,7 @@ import (
 	"encoding/json"
 )
 
-var user := User{
+var user = User{
 	Id : "E18C3000",
 	Name : "Y D"
 	Grade : 3
