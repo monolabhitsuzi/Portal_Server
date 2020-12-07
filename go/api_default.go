@@ -11,7 +11,14 @@ package swagger
 
 import (
 	"net/http"
+	"encoding/json"
 )
+
+var user := User{
+	Id : "E18C3000",
+	Name : "Y D"
+	Grade : 3
+}
 
 func CoursesIdGet(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
@@ -30,7 +37,8 @@ func UsersIdCourseGet(w http.ResponseWriter, r *http.Request) {
 
 func UsersIdGet(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(user)
+	//w.WriteHeader(http.StatusOK)
 }
 
 func UsersIdNotificationGet(w http.ResponseWriter, r *http.Request) {
