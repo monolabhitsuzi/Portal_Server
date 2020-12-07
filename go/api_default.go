@@ -16,7 +16,7 @@ import (
 
 var user = User{
 	Id : "E18C3000",
-	Name : "Y D"
+	Name : "Y D",
 	Grade : 3
 }
 
