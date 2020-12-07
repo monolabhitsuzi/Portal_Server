@@ -15,10 +15,12 @@ import (
 )
 
 var user = User{ Id:"E18C3000", Name:"Y D",	Grade:3 }
+var course = Course{ Id:1, Name:"Project Exercise3", Description:"This course is project exercise for the 3 grade.", Year:"2020", Semester:"autumn", Day:1, Time:1234, Location:"online" }
 
 func CoursesIdGet(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(course)
+	//w.WriteHeader(http.StatusOK)
 }
 
 func TasksGet(w http.ResponseWriter, r *http.Request) {
